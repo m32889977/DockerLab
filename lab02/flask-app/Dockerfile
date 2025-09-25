@@ -2,7 +2,7 @@
 FROM alpine:latest
 
 # Install  python + pip
-RUN apk add --update py2-pip
+RUN apk add --update python3 py3-pip
 
 # Install python modules for the app
 COPY requirements.txt  /usr/src/app/
