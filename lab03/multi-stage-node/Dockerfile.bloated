@@ -1,6 +1,7 @@
 # Dockerfile.bloated - Intentionally bloated for comparison
 
-FROM node:18  # Full Node image, not Alpine (much larger)
+# Full Node image, not Alpine (much larger)
+FROM node:18
 
 # Install additional unnecessary tools (for demonstration)
 RUN apt-get update && apt-get install -y \
