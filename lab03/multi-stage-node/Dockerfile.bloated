@@ -1,0 +1,31 @@
+# Dockerfile.bloated - Intentionally bloated for comparison
+
+FROM node:18  # Full Node image, not Alpine (much larger)
+
+# Install additional unnecessary tools (for demonstration)
+RUN apt-get update && apt-get install -y \
+    curl \
+    wget \
+    vim \
+    git \
+    build-essential
+
+WORKDIR /app
+
+# Copy everything including node_modules if it exists locally
+COPY . .
+
+# Install dependencies
+RUN npm install
+
+# Install additional global packages (unnecessary for runtime)
+RUN npm install -g nodemon ts-node typescript
+
+# Compile TypeScript
+RUN npx tsc
+
+# Expose port
+EXPOSE 3000
+
+# Run with node (all build tools still in image)
+CMD ["node", "dist/app.js"]

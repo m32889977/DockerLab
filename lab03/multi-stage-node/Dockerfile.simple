@@ -1,0 +1,21 @@
+# Dockerfile.simple - Non-optimized build for comparison
+
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy everything to container
+COPY . .
+
+# Install ALL dependencies (including dev dependencies)
+RUN npm install
+
+# Compile TypeScript
+RUN npx tsc
+
+# Expose port
+EXPOSE 3000
+
+# Run the application
+CMD ["node", "dist/app.js"]
